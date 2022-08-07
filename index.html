@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tourisfair plugin</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" defer src="./main.js"></script>
+    <script src="https://github.com/GIScience/openrouteservice-js/blob/master/dist/ors-js-client.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
+  </head>
+  <body onload="initPlan()">
+    <nav id="navbar">
+      <ul>
+        <li>
+          <a href="javascript:planTrip()">Plan a trip</a>
+        </li>
+        <li>
+          Search history
+          <ul id="trips">
+            <li>Empty</li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section id="main">
+      <section id="mapSection">
+        <div id="mapLeaflet"></div>
+      </section>
+      <section id="tripPlan"></section>
+      <section id="tripRequest">
+        <div id="cityImage"></div>
+        <section id="destination">
+          <label for="city">Votre destination</label>
+          <input type="text" id="city" oninput="search(this.value)" />
+          <select
+            id="destList"
+            size="10"
+            onchange="selectCity(this.selectedIndex)"
+            onclick="selectCity(this.selectedIndex)"
+          ></select>
+        </section>
+        <section id="dates">
+          <section id="start">
+            <label for="startDate">Arrivée</label>
+            <input type="date" id="startDate" onchange="selectDate()" />
+          </section>
+          <section id="end">
+            <label for="endDate">Départ</label>
+            <input type="date" id="endDate" onchange="selectDate()" />
+          </section>
+        </section>
+        <section id="participants">
+          <section id="actions">
+            <button id="add" onclick="addParticipant()">+</button>
+            <button id="remove" onclick="removeParticipant()">-</button>
+          </section>
+          <section id="participantsList">
+            <section id="participant0">
+              <label for="part0">
+                Participant 1
+              </label>
+              <input
+                type="number"
+                id="part0"
+                value="18"
+                onchange="changeParticipant(this, 0)"
+              />
+            </section>
+          </section>
+          <section id="tripRequest">
+            <button id="submitTrip" onclick="getPlan()">
+              Get your plan
+            </button>
+          </section>
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
